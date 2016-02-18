@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>My AngularJS App</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css" />
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css" />
+  <link rel="stylesheet" href="app.css" />
+  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+<body ng-app="">
+<div id="content">
+    <div id="stage"></div>
+    <ul ng-controller="Controls" id="controls">
+        <li>
+            <ul class="select">
+                <li class="title centered">
+                    <span>x</span>: <input type="range" ng-model="shape.translation.x" min="{{ left }}" max="{{ right }}">
+                </li>
+            </ul>
+        </li>
+        <li>
+            <ul class="select">
+                <li class="title centered">
+                    <span>y</span>: <input type="range" ng-model="shape.translation.y" min="{{ top }}" max="{{ bottom }}">
+                </li>
+            </ul>
+        </li>
+        <li>
+            <ul class="select">
+                <li class="title centered">
+                    <span>rotation</span>: <input type="range" ng-model="shape.rotation" min="0" max="6.28" step="0.01">
+                </li>
+            </ul>
+        </li>
+        <li>
+            <ul class="select">
+                <li class="title centered">
+                    <span>scale</span>: <input type="range" ng-model="shape.scale" min="0" max="2" step="0.01">
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+  <div>Angular seed app: v<span app-version></span></div>
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  -->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/pixi/bin/pixi.js"></script>
+  <script src="app.js"></script>
+  <script src="view1/view1.js"></script>
+  <script src="view2/view2.js"></script>
+  <script src="components/version/version.js"></script>
+  <script src="components/version/version-directive.js"></script>
+  <script src="components/version/interpolate-filter.js"></script>
+</body>
+</html>
