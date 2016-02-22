@@ -3,16 +3,44 @@
 // Declare app level module which depends on views, and components
     var app = angular.module('myApp', []);
 
-    app.controller('ControlsController', function () {
+    app.controller('ControlsController', ['$scope', function ($scope) {
 
-
+        var root = this;
         this.stage = stage;
         this.renderer = renderer;
 
+        this.function = 'clockRotate';
+
+        this.rotSpeed = 0.1;
+
+        $scope.form.type = $scope.typeOptions[0].value;
+
+        this.animation = {
+            clockRotate: function(object){
+                object.rotation += root.rotSpeed;
+            },
+            invRotate: function(object){
+                object.rotation -= root.rotSpeed;
+            }
+        };
+
+        var poulet = 'clockRotate';
+
+        this.animate = function() {
+
+            requestAnimationFrame(root.animate);
+
+            // Place your animation code between here...
+            //bunny.rotation += root.rotSpeed;
+            root.animation[poulet](bunny);
+            // ...and here
+
+            renderer.render(stage);
+        };
+
         document.body.appendChild(this.renderer.view);
 
-        requestAnimationFrame(animate);
-        console.log(this.stage);
+        requestAnimationFrame(root.animate);
         // create a texture from an image path
         var texture = PIXI.Texture.fromImage("ressources/bunny.png");
         // create a new Sprite using the texture
@@ -32,16 +60,6 @@
 
         stage.addChild(bunny);
 
-        function animate() {
-
-            requestAnimationFrame(animate);
-
-            // Place your animation code between here...
-            bunny.rotation += 0.1;
-            // ...and here
-
-            renderer.render(stage);
-        }
         // Here is your controls
         this.functions = [
             {
@@ -55,14 +73,22 @@
                  * Function that change something in your render with value
                  */
                 onChange: function(value){
-                    console.log(value);
+                    value /= 1000;
+                    root.rotSpeed = value;
+                    console.log(root.rotSpeed);
                 }
 
             }
-        ]
+        ];
+
+        $scope.setAnimation = {
+            animation: function(animation){
+                return arguments.length ? (poulet = animation) :animation;
+            }
+        }
 
 
-    });
+    }]);
 
     // - Pixi Initialization -
     // Pixi stage creation
