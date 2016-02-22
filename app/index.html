@@ -21,22 +21,26 @@
     <script src="components/version/interpolate-filter.js"></script>
 </head>
 <body>
+<header>
+    <ul>
+        <li id="title">Pixi Test</li>
+    </ul>
+</header>
 <div id="content" ng-controller="ControlsController as controls">
-    <div id="stage"></div>
     <ul id="controls">
-        <li ng-repeat="control in controls.functions">
+        <li><ul class="select">
+            <li class="title centered">
+                <span>Animation</span>: <select ng-model="controls.animName">
+                <option ng-repeat="(key, value) in controls.animations" value="{{key}}">{{key}}</option>
+            </select>
+            </li>
+        </ul></li>
+        <li  ng-repeat="control in controls.inputControls">
             <ul class="select">
                 <li class="title centered">
                     <span>{{control.name}}</span>: <input type="range" ng-change="control.onChange(myValue)"
-                                                          ng-model="myValue" min="0"
-                                                          max="200">
-                </li>
-            </ul>
-            <ul class="select">
-                <li class="title centered">
-                    <span>Animation</span>: <select ng-model="setAnimation.animation" ng-model-options="{ getterSetter: true }">
-                    <option ng-repeat="(key, value) in controls.animation" value="{{key}}">{{key}}</option>
-                </select><span ng-bind="setAnimation.animation()"></span>
+                                                          ng-model="myValue" min="{{control.min}}"
+                                                          max="{{control.max}}">
                 </li>
             </ul>
         </li>
