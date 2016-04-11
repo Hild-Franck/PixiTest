@@ -26,7 +26,7 @@ module.exports = function(grunt){
             options:{
                 force: true
             },
-            target: ['Gruntfile.js',"unit-tests/*.js" , "app/*.js"]
+            target: ['Gruntfile.js',"unit-tests/*.js" , "app/app.js"]
         },
         karma:{
             options:{
