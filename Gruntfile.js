@@ -46,7 +46,7 @@ module.exports = function(grunt){
                 livereload: true
             },
             js:{
-                files: ['app/*.js', 'tests/*js', 'app/*.html'],
+                files: ['app/*.js', 'unit-tests/*js', 'app/*.html', 'Gruntfile.js'],
                 tasks:['concurrent:target'],
                 options: {
                     atBegin: true
@@ -61,19 +61,12 @@ module.exports = function(grunt){
                 tasks: [['jshint'], 'karma:continuous']
             }
 
-        },
-        concat:{
-            js:{
-                src: ['app/main.js', 'app/Array/*.js', 'app/Class/*.js'],
-                dest: 'app/dist/build.js'
-            }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-concat');
 
     grunt.loadNpmTasks('grunt-notify');
     grunt.loadNpmTasks('grunt-concurrent');
@@ -82,6 +75,5 @@ module.exports = function(grunt){
     grunt.task.run('notify_hooks');
 
     grunt.registerTask('dev', ['jshint', 'watch']);
-    grunt.registerTask('pixiTest', ['jshint', "karma:single", "concat"]);
-    grunt.registerTask('code', ['jshint']);
+    grunt.registerTask('pixiTest', ['jshint', "karma:single"]);
 };

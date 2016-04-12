@@ -3,13 +3,20 @@
 // Declare app level module which depends on views, and components
     var app = angular.module('myApp', []);
 
-    app.controller('ControlsController', ['$scope', function ($scope) {
+    app.controller('ControlsController', function() {
         var root = this;
+
+        this.argList = {};
+        this.methods = [];
 
         // Initialize controller properties
         this.stage = stage;
         this.renderer = renderer;
         this.animName = 'clockRotate';
+        this.funcName = '';
+        this.objectCreated = [];
+
+
         // create a texture from an image path
         var texture = PIXI.Texture.fromImage("ressources/bunny.png");
         // create a new Sprite using the texture
@@ -33,6 +40,21 @@
             root.animations[root.animName](bunny);
             renderer.render(stage);
         };
+
+        this.init = function(testObject){
+            if(testObject === undefined) {
+                console.log('No object defined');
+                testObject = {};
+            }
+
+            root.methods = getObjectMethods(testObject);
+
+            root.methods.forEach(function(element, index){
+                root.argList[element] = getParamNames(testObject[element]);
+            });
+        };
+
+        this.init(testObject);
         requestAnimationFrame(root.animate);
 
         // Properties you'll use to customize your controls
@@ -98,8 +120,7 @@
             }
         };
 
-    }]);
-
+    });
     // - Pixi Initialization -
     // Pixi stage creation
     var stage = new PIXI.Stage(0x66FF99);
@@ -107,7 +128,7 @@
     // Renderer creation
     var renderer = PIXI.autoDetectRenderer(400, 300);
 
-
+    var testObject = PIXI;
 
 
 })();

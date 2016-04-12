@@ -13,6 +13,7 @@
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/pixi/bin/pixi.js"></script>
+    <script src="utils/object-properties.js"></script>
     <script src="app.js"></script>
     <script src="view1/view1.js"></script>
     <script src="view2/view2.js"></script>
@@ -28,6 +29,13 @@
 </header>
 <div id="content" ng-controller="ControlsController as controls">
     <ul id="controls">
+        <li><ul class="select">
+            <li class="title centered">
+                <span>Create</span>: <select ng-model="controls.funcName">
+                <option ng-repeat="(key, value) in controls.methods" value="{{value}}">{{value}}</option>
+            </select>
+            </li>
+        </ul></li>
         <li><ul class="select">
             <li class="title centered">
                 <span>Animation</span>: <select ng-model="controls.animName">
